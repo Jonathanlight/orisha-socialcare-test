@@ -1,9 +1,11 @@
 # orisha_socialcare
 
+![screenshot](screenshot.png)
+
 ### Requirements
 ---
 
-- PHP 8.3
+- PHP 8.3-apache
 - Apache 2.4
 - MySQL 5.7
 - Composer 2
@@ -42,6 +44,10 @@ printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltNam
 
 ### Configuration
 ---
+
+make php-cs-fixer
+make phpstan
+make phpunit
 
 ### Pipeline
 ---

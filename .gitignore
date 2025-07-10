@@ -1,16 +1,12 @@
-
 .idea
 .vscode
 .DS_Store
 Thumbs.db
 .php-cs-fixer.cache
 
-/var/*
-/app/orisha_socialcare/var/*
-/var/cache/*
-/var/logs/*
+/app/orisha_socialcare/composer.lock
+/app/orisha_socialcare/.phpunit.result.cache
+/app/orisha_socialcare/.php-cs-fixer.cache
+/app/orisha_socialcare/phpstan.neon
 /app/orisha_socialcare/vendor
-
-# PHPUnit
-/app/phpunit.xml
-/phpunit.xml
+/app/orisha_socialcare/phpunit.xml
