@@ -1,0 +1,46 @@
+networks:
+  orisha_socialcare:
+    driver: bridge
+
+volumes:
+  orisha_socialcare_db:
+
+services:
+  apache:
+    container_name: orisha_socialcare_apache
+    build: ./docker/build/apache
+    ports:
+      - '8000:80'
+    depends_on:
+      - mysql
+    volumes:
+      - './docker/etc/apache/virtualhost.conf:/etc/apache2/sites-enabled/000-default.conf:ro'
+      - './docker/etc/apache/default-ssl.conf:/etc/apache2/sites-enabled/default-ssl.conf'
+      - './docker/etc/php/php.ini:/usr/local/etc/php/php.ini'
+      - './docker/etc/apache/ssl/:/etc/apache2/conf/ssl'
+      - './app/orisha_socialcare:/var/www/orisha_socialcare'
+    networks:
+      - orisha_socialcare
+  mysql:
+    container_name: orisha_socialcare_mysql
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    volumes:
+      - './docker/etc/mysql/my.cnf:/etc/mysql/conf.d/my.cnf'
+      - 'orisha_socialcare_db:/var/lib/mysql:cached'
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: orisha_socialcare
+    networks:
+      - orisha_socialcare
+
+  phpmyadmin:
+    container_name: orisha_socialcare_phpmyadmin
+    ports:
+      - '8001:80'
+    image: nazarpc/phpmyadmin
+    networks:
+      - orisha_socialcare
+    depends_on:
+      - mysql
